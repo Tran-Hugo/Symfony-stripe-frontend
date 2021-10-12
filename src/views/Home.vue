@@ -35,7 +35,7 @@ export default {
       axios.delete("https://127.0.0.1:8000/api/cart_items/"+item.id)
           .then(res=>{console.log(res,'OK')})
 })
-    }
+    },
   }
 }
 </script>

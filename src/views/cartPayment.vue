@@ -1,5 +1,5 @@
 <template>
-{{cardholderEmail}}
+{{message}}
   <body>
       <form class="d-flex justify-content-center" @submit.prevent="submit" id="payment-form">
         <div class="form-row col-6">
@@ -24,6 +24,7 @@ export default {
             cartId:'',
             cardholderName:'',
             cardholderEmail:'',
+            message:''
         }
     },
     mounted(){
@@ -65,6 +66,9 @@ export default {
                     // console.log(result.paymentIntent,result)
                     this.stripeTokenHandler(result.paymentIntent)
                     // console.log(result.paymentIntent,result)
+                } else if ('error' in result) {
+                    console.log(result.error.code)
+                    this.message = 'Carte refusée'
                 }
             })
         },
@@ -77,6 +81,9 @@ export default {
             }
             console.log(data)
             axios.post('https://127.0.0.1:8000/payment/'+this.cartId+'/subscription',data)
+                .then(
+                    window.location.href="http://localhost:8080/"
+                   )
                 // .then(res=>{
                 //     console.log(res)
                 // })
