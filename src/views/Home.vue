@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    
+    <Map/>
     
     <ul v-for="(item,key) in cartItems" :key="key" class="list-group list-group-flush">
   <li class="list-group-item">{{item['book']['title']}}  <span class="badge bg-primary rounded-pill">{{item.quantity}}</span></li>
@@ -13,9 +13,13 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import Map from '@/components/leaflet.vue'
 
 export default {
   name: 'Home',
+  components:{
+    Map
+  },
   data(){
     return {
       cartItems:[]
